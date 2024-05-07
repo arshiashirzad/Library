@@ -97,4 +97,39 @@ public:
         this->borrowedBooks = nullptr;
         this->next = nullptr;
     }
+    int getId() {
+        return id;
+    }
+
+    void setId(int id) {
+        this->id = id;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    void setName(string name) {
+        this->name = name;
+    }
+
+    int getAge() {
+        return age;
+    }
+
+    void setAge(int age) {
+        this->age = age;
+    }
+
+    Book* getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    Person* getNext() {
+        return next;
+    }
+
+    void setNext(Person* next) {
+        this->next = next;
+    }
 };
