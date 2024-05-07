@@ -116,6 +116,33 @@ public:
     int getAge() {
         return age;
     }
+    void borrowBook(Book* book) {
+        book->setIsBorrowed(true);
+        book->setNext(borrowedBooks);
+        borrowedBooks = book;
+    }
+
+    void returnBook(Book* book) {
+        Book* current = borrowedBooks;
+        Book* previous = nullptr;
+
+        while (current != nullptr && current != book) {
+            previous = current;
+            current = current->getNext();
+        }
+
+        if (current == nullptr) {
+            cout << "This book is not borrowed by the person." << endl;
+            return;
+        }
+
+        if (previous == nullptr)
+            borrowedBooks = borrowedBooks->getNext();
+        else
+            previous->setNext(current->getNext());
+
+        book->setIsBorrowed(false);
+    }
 
     void setAge(int age) {
         this->age = age;
