@@ -79,3 +79,22 @@ public:
         this->next = next;
     }
 };
+
+
+class Person {
+private:
+    int id;
+    string name;
+    int age;
+    Book *borrowedBooks;
+    Person *next;
+
+public:
+    Person(int id, string name, int age) {
+        this->id = id;
+        this->name = name;
+        this->age = age;
+        this->borrowedBooks = nullptr;
+        this->next = nullptr;
+    }
+};
