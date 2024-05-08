@@ -173,5 +173,61 @@ public:
             this->members = nullptr;
             this->books = nullptr;
         }
+        string getName() {
+            return name;
+        }
+        void setName(string name) {
+            this->name = name;
+        }
+        string getPhoneNumber() {
+            return phoneNumber;
+        }
+        void setPhoneNumber(string phoneNumber) {
+            this->phoneNumber = phoneNumber;
+        }
+        void addMember(Person* person) {
+            person->setNext(members);
+            members = person;
+        }
+        void removeMember(int id) {
+            Person* current = members;
+            Person* previous = nullptr;
+            while (current != nullptr && current->getId() != id) {
+                previous = current;
+                current = current->getNext();
+            }
+            if (current == nullptr) {
+                cout << "Person with ID " << id << " not found." << endl;
+                return;
+            }
+            if (previous == nullptr)
+                members = members->getNext();
+            else
+                previous->setNext(current->getNext());
+            delete current;
+        }
+        void addBook(Book* book) {
+            book->setNext(books);
+            books = book;
+        }
+        void removeBook(int id) {
+            Book* current = books;
+            Book* previous = nullptr;
+            while (current != nullptr && current->getId() != id) {
+                previous = current;
+                current = current->getNext();
+            }
+            if (current == nullptr) {
+                cout << "Book with ID " << id << " not found." << endl;
+                return;
+            }
+            if (previous == nullptr)
+                books = books->getNext();
+            else
+                previous->setNext(current->getNext());
+
+            delete current;
+        }
+
         };
     };
