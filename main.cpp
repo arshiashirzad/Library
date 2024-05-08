@@ -159,4 +159,19 @@ public:
     void setNext(Person* next) {
         this->next = next;
     }
-};
+    class Library {
+    private:
+        string name;
+        string phoneNumber;
+        Person* members;
+        Book* books;
+
+    public:
+        Library(string name, string phoneNumber) {
+            this->name = name;
+            this->phoneNumber = phoneNumber;
+            this->members = nullptr;
+            this->books = nullptr;
+        }
+        };
+    };
