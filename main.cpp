@@ -228,6 +228,21 @@ public:
 
             delete current;
         }
-
+        void printBooks() {
+            cout << "Books in the library:" << endl;
+            Book* current = books;
+            while (current != nullptr) {
+                cout << "ID: " << current->getId() << ", Name: " << current->getName() << ", Author: " << current->getAuthor() << ", Price: " << current->getPrice() << ", Type: " << current->getType() << ", Borrowed: " << (current->getIsBorrowed() ? "Yes" : "No") << endl;
+                current = current->getNext();
+            }
+        }
+        void printMembers() {
+            cout << "Members of the library:" << endl;
+            Person* current = members;
+            while (current != nullptr) {
+                cout << "ID: " << current->getId() << ", Name: " << current->getName() << ", Age: " << current->getAge() << endl;
+                current = current->getNext();
+            }
+        }
         };
     };
