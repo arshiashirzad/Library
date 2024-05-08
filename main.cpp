@@ -11,7 +11,7 @@ private:
     double price;
     string author;
     bool isBorrowed;
-    Book* next;
+    Book *next;
 
 public:
     Book(int id, string type, string name, double price, string author) {
@@ -27,6 +27,7 @@ public:
     int getId() {
         return id;
     }
+
     void setId(int id) {
         this->id = id;
     }
@@ -71,15 +72,14 @@ public:
         this->isBorrowed = isBorrowed;
     }
 
-    Book* getNext() {
+    Book *getNext() {
         return next;
     }
 
-    void setNext(Book* next) {
+    void setNext(Book *next) {
         this->next = next;
     }
 };
-
 
 class Person {
 private:
@@ -97,6 +97,7 @@ public:
         this->borrowedBooks = nullptr;
         this->next = nullptr;
     }
+
     int getId() {
         return id;
     }
@@ -116,15 +117,16 @@ public:
     int getAge() {
         return age;
     }
-    void borrowBook(Book* book) {
+
+    void borrowBook(Book *book) {
         book->setIsBorrowed(true);
         book->setNext(borrowedBooks);
         borrowedBooks = book;
     }
 
-    void returnBook(Book* book) {
-        Book* current = borrowedBooks;
-        Book* previous = nullptr;
+    void returnBook(Book *book) {
+        Book *current = borrowedBooks;
+        Book *previous = nullptr;
 
         while (current != nullptr && current != book) {
             previous = current;
@@ -148,101 +150,135 @@ public:
         this->age = age;
     }
 
-    Book* getBorrowedBooks() {
+    Book *getBorrowedBooks() {
         return borrowedBooks;
     }
 
-    Person* getNext() {
+    Person *getNext() {
         return next;
     }
 
-    void setNext(Person* next) {
+    void setNext(Person *next) {
         this->next = next;
     }
-    class Library {
-    private:
-        string name;
-        string phoneNumber;
-        Person* members;
-        Book* books;
+};
 
-    public:
-        Library(string name, string phoneNumber) {
-            this->name = name;
-            this->phoneNumber = phoneNumber;
-            this->members = nullptr;
-            this->books = nullptr;
-        }
-        string getName() {
-            return name;
-        }
-        void setName(string name) {
-            this->name = name;
-        }
-        string getPhoneNumber() {
-            return phoneNumber;
-        }
-        void setPhoneNumber(string phoneNumber) {
-            this->phoneNumber = phoneNumber;
-        }
-        void addMember(Person* person) {
-            person->setNext(members);
-            members = person;
-        }
-        void removeMember(int id) {
-            Person* current = members;
-            Person* previous = nullptr;
-            while (current != nullptr && current->getId() != id) {
-                previous = current;
-                current = current->getNext();
-            }
-            if (current == nullptr) {
-                cout << "Person with ID " << id << " not found." << endl;
-                return;
-            }
-            if (previous == nullptr)
-                members = members->getNext();
-            else
-                previous->setNext(current->getNext());
-            delete current;
-        }
-        void addBook(Book* book) {
-            book->setNext(books);
-            books = book;
-        }
-        void removeBook(int id) {
-            Book* current = books;
-            Book* previous = nullptr;
-            while (current != nullptr && current->getId() != id) {
-                previous = current;
-                current = current->getNext();
-            }
-            if (current == nullptr) {
-                cout << "Book with ID " << id << " not found." << endl;
-                return;
-            }
-            if (previous == nullptr)
-                books = books->getNext();
-            else
-                previous->setNext(current->getNext());
+class Library {
+private:
+    string name;
+    string phoneNumber;
+    Person *members;
+    Book *books;
 
-            delete current;
+public:
+    Library(string name, string phoneNumber) {
+        this->name = name;
+        this->phoneNumber = phoneNumber;
+        this->members = nullptr;
+        this->books = nullptr;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    void setName(string name) {
+        this->name = name;
+    }
+
+    string getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    void setPhoneNumber(string phoneNumber) {
+        this->phoneNumber = phoneNumber;
+    }
+
+    void addMember(Person *person) {
+        person->setNext(members);
+        members = person;
+    }
+
+    void removeMember(int id) {
+        Person *current = members;
+        Person *previous = nullptr;
+        while (current != nullptr && current->getId() != id) {
+            previous = current;
+            current = current->getNext();
         }
-        void printBooks() {
-            cout << "Books in the library:" << endl;
-            Book* current = books;
-            while (current != nullptr) {
-                cout << "ID: " << current->getId() << ", Name: " << current->getName() << ", Author: " << current->getAuthor() << ", Price: " << current->getPrice() << ", Type: " << current->getType() << ", Borrowed: " << (current->getIsBorrowed() ? "Yes" : "No") << endl;
-                current = current->getNext();
-            }
+        if (current == nullptr) {
+            cout << "Person with ID " << id << " not found." << endl;
+            return;
         }
-        void printMembers() {
-            cout << "Members of the library:" << endl;
-            Person* current = members;
-            while (current != nullptr) {
-                cout << "ID: " << current->getId() << ", Name: " << current->getName() << ", Age: " << current->getAge() << endl;
-                current = current->getNext();
-            }
+        if (previous == nullptr)
+            members = members->getNext();
+        else
+            previous->setNext(current->getNext());
+        delete current;
+    }
+
+    void addBook(Book *book) {
+        book->setNext(books);
+        books = book;
+    }
+
+    void removeBook(int id) {
+        Book *current = books;
+        Book *previous = nullptr;
+        while (current != nullptr && current->getId() != id) {
+            previous = current;
+            current = current->getNext();
         }
-        };
+        if (current == nullptr) {
+            cout << "Book with ID " << id << " not found." << endl;
+            return;
+        }
+        if (previous == nullptr)
+            books = books->getNext();
+        else
+            previous->setNext(current->getNext());
+
+        delete current;
+    }
+
+    void printBooks() {
+        cout << "Books in the library:" << endl;
+        Book *current = books;
+        while (current != nullptr) {
+            cout << "ID: " << current->getId() << ", Name: " << current->getName() << ", Author: "
+                 << current->getAuthor() << ", Price: " << current->getPrice() << ", Type: " << current->getType()
+                 << ", Borrowed: " << (current->getIsBorrowed() ? "Yes" : "No") << endl;
+            current = current->getNext();
+        }
+    }
+
+    void printMembers() {
+        cout << "Members of the library:" << endl;
+        Person *current = members;
+        while (current != nullptr) {
+            cout << "ID: " << current->getId() << ", Name: " << current->getName() << ", Age: " << current->getAge()
+                 << endl;
+            current = current->getNext();
+        }
     };
+};
+int main() {
+    Library library("MyLibrary", "123456789");
+
+    Book book1(1, "Riazi", "Riazi 2", 10.99, "nasa");
+    Book book2(2, "Code", "GeekForGeeks", 15.99, "zareBin");
+    Book book3(3, "Algorithm", "How to Center A DIIIIV", 12.99, "Backend-developers nightmare");
+
+    library.addBook(&book1);
+    library.addBook(&book2);
+    library.addBook(&book3);
+
+    Person person1(1, "arshia", 19);
+
+    library.addMember(&person1);
+
+    person1.borrowBook(&book1);
+library.printMembers();
+    library.printBooks();
+    return 0;
+}
